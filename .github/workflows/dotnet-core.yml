@@ -27,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: TesteNServiceBus
-        path: /home/runner/work/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5/publish/
+        path: /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
