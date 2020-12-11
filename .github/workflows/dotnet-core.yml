@@ -21,8 +21,10 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - name: Publish
+      run: dotnet publish
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: TesteNServiceBus
-        path: /home/runner/work/TesteNServiceBus/TesteNServiceBus/bin/Debug/netcoreapp5.0/publish/
+        path: /home/runner/work/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5/publish/
