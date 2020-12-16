@@ -10,6 +10,10 @@ ILog log = LogManager.GetLogger("Program");
 Title = "ClientUI";
 var endpointConfiguration = new EndpointConfiguration("ClientUI");
 var trasnport = endpointConfiguration.UseTransport<LearningTransport>();
+
+var routing = trasnport.Routing();
+routing.RouteToEndpoint(typeof(PlaceOrder), "Sales");
+
 var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
 
 await RunLoop(endpointInstance).ConfigureAwait(false);
@@ -38,5 +42,5 @@ async Task SendMessage(IEndpointInstance endpointInstance)
 {
     var command = new PlaceOrder { OrderId = Guid.NewGuid().ToString() };
     log.Info($"Send PlaceOrder command - OrderId: {command.OrderId}");
-    await endpointInstance.SendLocal(command).ConfigureAwait(false);
+    await endpointInstance.Send(command).ConfigureAwait(false);
 }
