@@ -30,6 +30,9 @@ jobs:
       with:
         name: TesteNServiceBus
         path: /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
+    - name: Zip Artifact
+      run: |
+        zip --junk-paths TesteNServiceBus /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -47,6 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
+          asset_path: ./TesteNServiceBus.zip
           asset_name: TesteNServiceBus
           asset_content_type: application/zip
