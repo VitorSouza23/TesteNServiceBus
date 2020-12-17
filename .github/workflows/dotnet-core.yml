@@ -3,6 +3,8 @@ name: .NET Core
 on:
   push:
     branches: [ master ]
+    tags:
+      - 'v*'
   pull_request:
     branches: [ master ]
 
@@ -28,3 +30,26 @@ jobs:
       with:
         name: TesteNServiceBus
         path: /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
+    - name: Zip Artifact
+      run: |
+        zip -r -D TesteNServiceBus.zip /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          tag_name: ${{ github.run_id }}
+          release_name: Release ${{ github.run_id }}
+          draft: false
+          prerelease: true
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./TesteNServiceBus.zip
+          asset_name: TesteNServiceBus
+          asset_content_type: application/zip
