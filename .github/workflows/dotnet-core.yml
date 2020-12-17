@@ -47,6 +47,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./my-artifact.zip
-          asset_name: my-artifact.zip
+          asset_path: /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
+          asset_name: TesteNServiceBus
           asset_content_type: application/zip
