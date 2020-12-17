@@ -32,7 +32,7 @@ jobs:
         path: /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
     - name: Zip Artifact
       run: |
-        zip -r -d TesteNServiceBus.zip /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
+        zip -r -D TesteNServiceBus.zip /home/runner/work/TesteNServiceBus/TesteNServiceBus/TesteNServiceBus/bin/Debug/net5.0/publish/
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
